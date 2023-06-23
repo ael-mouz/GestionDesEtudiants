@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\EfmController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\InscriptionController;
+use App\Models\Efm;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +25,4 @@ Route::get('/', function () {
 Route::resource('/etudiants', EtudiantController::class);
 Route::resource('/filieres', FiliereController::class);
 Route::resource('/inscriptions', InscriptionController::class);
+Route::resource('/efms', EfmController::class);
