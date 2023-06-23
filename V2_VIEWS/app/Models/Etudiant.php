@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Etudiant extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'cne',
+        'nom',
+        'prenom',
+        'photo',
+        'cv',
+        'daten',
+        'email',
+    ];
+
+    public function inscriptions()
+    {
+        return $this->hasMany(Inscription::class, 'etudiant_id');
+    }
 }

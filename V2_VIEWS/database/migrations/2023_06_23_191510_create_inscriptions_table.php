@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
+            $table->string('dateinscription');
+            $table->unsignedBigInteger('filiere_id');
+            $table->unsignedBigInteger('etudiant_id');
+            $table->foreign('filiere_id')->references('filieres')->on('id')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('etudiant_id')->references('etudiants')->on('id')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }
