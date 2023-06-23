@@ -24,6 +24,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('filieres.index') }}">Filieres</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('inscriptions.index') }}">Inscriptions</a>
+          </li>
         </ul>
       </div>
     </div>
