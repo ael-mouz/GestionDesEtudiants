@@ -101,23 +101,21 @@ class EtudiantController extends Controller
             $photoPath = $request->file('photo');
             $photo = time() . '.' . $photoPath->getClientOriginalExtension();
             $photoPath->move(public_path('photos'), $photo);
-            $etudiant->photo = $photo;
         }
 
         if ($request->hasFile('cv')) {
             $cvPath = $request->file('cv');
             $cv = time() . '.' . $cvPath->getClientOriginalExtension();
             $cvPath->move(public_path('cv'), $cv);
-            $etudiant->cv = $cv;
         }
 
-        $etudiant->cne = $request->input('cne');
-        $etudiant->nom = $request->input('nom');
-        $etudiant->prenom = $request->input('prenom');
-        $etudiant->daten = $request->input('daten');
-        $etudiant->email = $request->input('email');
-
-        $etudiant->save();
+        $etudiant->update([
+            "cne" => $request->input('cne'),
+            "nom" => $request->input('nom'),
+            "prenom" => $request->input('prenom'),
+            "daten" => $request->input('daten'),
+            "email" => $request->input('email'),
+        ]);
 
         return redirect()->route('etudiants.index')->with('success', 'Etudiant updated successfully.');
     }
