@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('efms', function (Blueprint $table) {
             $table->id();
             $table->string('codemodule');
-            $table->string('note');
+            $table->float('note');
             $table->string('coef');
             $table->unsignedBigInteger('etudiant_id');
-            $table->foreign('etudiant_id')->references('etudiants')->on('id')
+            $table->foreign('etudiant_id')->references('id')->on('etudiants')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->timestamps();

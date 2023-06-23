@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
-            $table->string('dateinscription');
+            $table->date('dateinscription');
             $table->unsignedBigInteger('filiere_id');
             $table->unsignedBigInteger('etudiant_id');
-            $table->foreign('filiere_id')->references('filieres')->on('id')
+            $table->foreign('filiere_id')->references('id')->on('filieres')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreign('etudiant_id')->references('etudiants')->on('id')
+            $table->foreign('etudiant_id')->references('id')->on('etudiants')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->timestamps();
