@@ -21,8 +21,7 @@ class EtudiantController extends Controller
      */
     public function create()
     {
-        $etudiants = Etudiant::all();
-        return view('etudiants.index', compact('etudiants'));
+        return view('etudiants.create');
     }
 
     /**
@@ -34,8 +33,8 @@ class EtudiantController extends Controller
             'cne' => 'required|integer',
             'nom' => 'required|string',
             'prenom' => 'required|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'cv' => 'nullable|mimes:pdf|max:2048',
+            'photo' => 'required',
+            'cv' => 'required',
             'daten' => 'required|date',
             'email' => 'required|string|unique:etudiants,email,',
         ]);
@@ -43,13 +42,17 @@ class EtudiantController extends Controller
         $etudiant = new Etudiant();
 
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public');
-            $etudiant->photo = $photoPath;
+            $photoPath = $request->file('photo');
+            $photo = time() . '.' . $photoPath->getClientOriginalExtension();
+            $photoPath->move(public_path('photos'), $photo);
+            $etudiant->photo = $photo;
         }
 
         if ($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('cv', 'public');
-            $etudiant->cv = $cvPath;
+            $cvPath = $request->file('cv');
+            $cv = time() . '.' . $cvPath->getClientOriginalExtension();
+            $cvPath->move(public_path('cv'), $cv);
+            $etudiant->cv = $cv;
         }
 
         $etudiant->cne = $request->input('cne');
@@ -76,7 +79,7 @@ class EtudiantController extends Controller
      */
     public function edit(Etudiant $etudiant)
     {
-        return view('etudiants.show', compact('etudiant'));
+        return view('etudiants.edit', compact('etudiant'));
     }
 
     /**
@@ -91,17 +94,21 @@ class EtudiantController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'cv' => 'nullable|mimes:pdf|max:2048',
             'daten' => 'required|date',
-            'email' => 'required|string|unique:etudiants,email,',
+            'email' => 'required|string',
         ]);
 
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public');
-            $etudiant->photo = $photoPath;
+            $photoPath = $request->file('photo');
+            $photo = time() . '.' . $photoPath->getClientOriginalExtension();
+            $photoPath->move(public_path('photos'), $photo);
+            $etudiant->photo = $photo;
         }
 
         if ($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('cv', 'public');
-            $etudiant->cv = $cvPath;
+            $cvPath = $request->file('cv');
+            $cv = time() . '.' . $cvPath->getClientOriginalExtension();
+            $cvPath->move(public_path('cv'), $cv);
+            $etudiant->cv = $cv;
         }
 
         $etudiant->cne = $request->input('cne');

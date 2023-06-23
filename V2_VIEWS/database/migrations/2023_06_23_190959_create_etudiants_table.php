@@ -16,8 +16,8 @@ return new class extends Migration
             $table->integer('cne');
             $table->string('nom');
             $table->string('prenom');
-            $table->string('photo');
-            $table->string('cv');
+            $table->string('photo')->nullable()->default(null);
+            $table->string('cv')->nullable()->default(null);
             $table->date('daten');
             $table->string('email')->unique();
             $table->timestamps();
